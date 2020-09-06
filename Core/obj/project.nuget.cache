@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "wHR5PhuiqevVxDye2wYwfslio0uQOQkcIdpuLgQqifUW4hctXadUUk5p9r7SmVUSGbxyEP1Qud+HV+A7QZwlEg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\fatih.yilmaz\\source\\repos\\MarsRover\\Core\\Core.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\fatih.yilmaz\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\fatih.yilmaz\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,0 +1,12 @@
+C:\Users\fatih.yilmaz\source\repos\MarsRover\MarsRover.Services\bin\Release\netstandard2.0\MarsRover.Services.deps.json
+C:\Users\fatih.yilmaz\source\repos\MarsRover\MarsRover.Services\bin\Release\netstandard2.0\MarsRover.Services.dll
+C:\Users\fatih.yilmaz\source\repos\MarsRover\MarsRover.Services\bin\Release\netstandard2.0\MarsRover.Services.pdb
+C:\Users\fatih.yilmaz\source\repos\MarsRover\MarsRover.Services\bin\Release\netstandard2.0\MarsRover.Core.dll
+C:\Users\fatih.yilmaz\source\repos\MarsRover\MarsRover.Services\bin\Release\netstandard2.0\MarsRover.Core.pdb
+C:\Users\fatih.yilmaz\source\repos\MarsRover\MarsRover.Services\obj\Release\netstandard2.0\MarsRover.Services.csprojAssemblyReference.cache
+C:\Users\fatih.yilmaz\source\repos\MarsRover\MarsRover.Services\obj\Release\netstandard2.0\MarsRover.Services.AssemblyInfoInputs.cache
+C:\Users\fatih.yilmaz\source\repos\MarsRover\MarsRover.Services\obj\Release\netstandard2.0\MarsRover.Services.AssemblyInfo.cs
+C:\Users\fatih.yilmaz\source\repos\MarsRover\MarsRover.Services\obj\Release\netstandard2.0\MarsRover.Services.csproj.CoreCompileInputs.cache
+C:\Users\fatih.yilmaz\source\repos\MarsRover\MarsRover.Services\obj\Release\netstandard2.0\MarsRover.Services.csproj.CopyComplete
+C:\Users\fatih.yilmaz\source\repos\MarsRover\MarsRover.Services\obj\Release\netstandard2.0\MarsRover.Services.dll
+C:\Users\fatih.yilmaz\source\repos\MarsRover\MarsRover.Services\obj\Release\netstandard2.0\MarsRover.Services.pdb

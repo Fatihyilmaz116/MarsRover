@@ -1,0 +1,9 @@
+C:\Users\fatih.yilmaz\source\repos\MarsRover\MarsRover.Core\obj\Debug\netstandard2.0\MarsRover.Core.AssemblyInfoInputs.cache
+C:\Users\fatih.yilmaz\source\repos\MarsRover\MarsRover.Core\obj\Debug\netstandard2.0\MarsRover.Core.AssemblyInfo.cs
+C:\Users\fatih.yilmaz\source\repos\MarsRover\MarsRover.Core\obj\Debug\netstandard2.0\MarsRover.Core.csproj.CoreCompileInputs.cache
+C:\Users\fatih.yilmaz\source\repos\MarsRover\MarsRover.Core\bin\Debug\netstandard2.0\MarsRover.Core.deps.json
+C:\Users\fatih.yilmaz\source\repos\MarsRover\MarsRover.Core\bin\Debug\netstandard2.0\MarsRover.Core.dll
+C:\Users\fatih.yilmaz\source\repos\MarsRover\MarsRover.Core\bin\Debug\netstandard2.0\MarsRover.Core.pdb
+C:\Users\fatih.yilmaz\source\repos\MarsRover\MarsRover.Core\obj\Debug\netstandard2.0\MarsRover.Core.dll
+C:\Users\fatih.yilmaz\source\repos\MarsRover\MarsRover.Core\obj\Debug\netstandard2.0\MarsRover.Core.pdb
+C:\Users\fatih.yilmaz\source\repos\MarsRover\MarsRover.Core\obj\Debug\netstandard2.0\MarsRover.Core.csprojAssemblyReference.cache

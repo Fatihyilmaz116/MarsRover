@@ -1,0 +1,4 @@
+C:\Users\fatih.yilmaz\source\repos\MarsRover\MarsRover.UI.Console\obj\Release\netcoreapp3.1\MarsRover.UI.Console.csprojAssemblyReference.cache
+C:\Users\fatih.yilmaz\source\repos\MarsRover\MarsRover.UI.Console\obj\Release\netcoreapp3.1\MarsRover.UI.Console.AssemblyInfoInputs.cache
+C:\Users\fatih.yilmaz\source\repos\MarsRover\MarsRover.UI.Console\obj\Release\netcoreapp3.1\MarsRover.UI.Console.AssemblyInfo.cs
+C:\Users\fatih.yilmaz\source\repos\MarsRover\MarsRover.UI.Console\obj\Release\netcoreapp3.1\MarsRover.UI.Console.csproj.CoreCompileInputs.cache
