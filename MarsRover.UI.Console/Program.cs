@@ -12,16 +12,16 @@ namespace MarsRover.UI.Console
     {
         private static IPlatformAppService _platformAppService;
         private static IRoverAppService _roverAppService;
-        public static int MaxRoverCount => 2;
 
         public static Platform CurrentPlatform { get; set; }
 
         public static List<Rover> RoverList { get; set; }
 
+        public static int RoverMaximumCount = 2;
+
         static void Main(string[] args)
         {
-            #region Dependency Injection
-
+            //Dependency Injection
             var services = new ServiceCollection()
                     .AddSingleton<IPlatformAppService, PlatformAppService>()
                     .AddSingleton<IRoverAppService, RoverAppService>()
@@ -30,7 +30,7 @@ namespace MarsRover.UI.Console
             _platformAppService = services.GetService<IPlatformAppService>();
             _roverAppService = services.GetService<IRoverAppService>();
 
-            #endregion
+          
 
             RoverList = new List<Rover>();
 
@@ -44,7 +44,7 @@ namespace MarsRover.UI.Console
 
                 StartRover();
 
-                ExecuteWorker();
+                Calculate();
 
                 System.Console.WriteLine("Press any key for exit");
 
@@ -61,13 +61,13 @@ namespace MarsRover.UI.Console
           
             while (CurrentPlatform == null)
             {
-                string platformCoordinate = System.Console.ReadLine();
+                string platform = System.Console.ReadLine();
 
-                CurrentPlatform = _platformAppService.Create(platformCoordinate);
+                CurrentPlatform = _platformAppService.Create(platform);
 
                 if (CurrentPlatform == null)
                 {
-                    System.Console.WriteLine("Invalid coordinate, Example coordinate: \"3 3\"");
+                    System.Console.WriteLine("Invalid coordinate, Example coordinate: 3 3");
                 }
             }
 
@@ -75,18 +75,18 @@ namespace MarsRover.UI.Console
 
         public static void StartRover()
         {
-            while (RoverList.Count != MaxRoverCount)
+            while (RoverList.Count != RoverMaximumCount)
             {
                 bool roverIsReady = false;
-                bool roverCommandsAreReady = false;
+                bool roverCommandsReady = false;
 
                 System.Console.WriteLine($"Enter {RoverList.Count + 1}.Rover coordinate");
 
-                while (!roverIsReady)
+                if (!roverIsReady)
                 {
-                    var roverCoordinateString = System.Console.ReadLine();
+                    var roverCoordinate = System.Console.ReadLine();
 
-                    var roverCreateResult = _roverAppService.Create(roverCoordinateString, CurrentPlatform);
+                    var roverCreateResult = _roverAppService.Create(roverCoordinate, CurrentPlatform);
 
                     var currentRover = roverCreateResult.Rover;
 
@@ -100,19 +100,17 @@ namespace MarsRover.UI.Console
 
                         System.Console.WriteLine($"Enter {RoverList.Count + 1}.Rover commands");
 
-                        while (!roverCommandsAreReady)
-                        {
-                            var roverCommand = System.Console.ReadLine();
+                        if (!roverCommandsReady)
+                        { 
+                            var roverCommands = _roverAppService.GetCommandList(System.Console.ReadLine());
 
-                            var roverCommands = _roverAppService.GetCommands(roverCommand);
-
-                            if (roverCommands.Length == 0)
+                            if (roverCommands.Count == 0)
                             {
-                                System.Console.WriteLine($"Please enter {RoverList.Count + 1}.Rover valid command values like this template: \"MLMLMLMML\"");
+                                System.Console.WriteLine($"Please enter {RoverList.Count + 1}.Rover valid command values,Example: \"MLMLMLMML\"");
                             }
                             else
                             {
-                                roverCommandsAreReady = true;
+                                roverCommandsReady = true;
 
                                 currentRover.Commands = roverCommands;
 
@@ -124,17 +122,13 @@ namespace MarsRover.UI.Console
             }
         }
 
-        public static void ExecuteWorker()
-        {
-            var count = 0;
-
+        public static void Calculate()
+        {  
             foreach (var rover in RoverList)
-            {
-                count++;
+            { 
+                _roverAppService.CalculateCommands(rover);
 
-                _roverAppService.ExecuteCommands(rover);
-
-                System.Console.WriteLine($"{count}. Rover => {rover.Location.X} {rover.Location.Y} {rover.Location.Heading.GetEnumCode()}");
+                System.Console.WriteLine($"{rover.Location.X} {rover.Location.Y} {rover.Location.Heading.GetEnumCode()}");
             }
         }
 

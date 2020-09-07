@@ -18,26 +18,27 @@ public class RoverAppService : IRoverAppService
         if (platform == null)
         {
             roverResult.AlertMessage = "Platform is empty";
-
-            return roverResult;
         }
-
-        var locationResult = CreateRoverLocation(platform, coordinate);
-
-        if (locationResult.Location == null)
+        else
         {
-            roverResult.AlertMessage = locationResult.AlertMessage;
+            var locationResult = CreateRoverLocation(platform, coordinate);
 
-            return roverResult;
+            if (locationResult.Location == null)
+            {
+                roverResult.AlertMessage = locationResult.AlertMessage;
+            }
+            else
+            {
+                roverResult.Rover = new Rover(locationResult.Location, platform);
+            }
+
         }
-
-        roverResult.Rover = new Rover(locationResult.Location, platform);
 
         return roverResult;
     }
 
 
-    public Rover ExecuteCommands(Rover rover)
+    public Rover CalculateCommands(Rover rover)
     {
         int count = 0;
 
@@ -52,11 +53,6 @@ public class RoverAppService : IRoverAppService
                 break;
             }
 
-            if (rover.RoverHistory.Count == 5)
-            {
-
-            }
-
             Execute(rover, command);
 
             rover.RoverHistory.Add(new RoverHistory
@@ -69,22 +65,22 @@ public class RoverAppService : IRoverAppService
         return rover;
     }
 
-    public Command[] GetCommands(string command)
+    public List<Command> GetCommandList(string command)
     {
         Command[] validCommands =
             Enum.GetValues(typeof(Command))
                 .Cast<Command>()
                 .ToArray();
 
-        string[] commandCodes = validCommands.Select(x => x.GetEnumCode()).ToArray();
+        List<string> commandCodes = validCommands.Select(x => x.GetEnumCode()).ToList();
 
-        string[] separatedCommands = command.ToCharArray().Select(x => x.ToString()).ToArray();
+        List<string> separatedCommands = command.ToCharArray().Select(x => x.ToString()).ToList();
 
-        string[] unsupportedCommands = separatedCommands.Distinct().Except(commandCodes).ToArray();
+        List<string> unsupportedCommands = separatedCommands.Distinct().Except(commandCodes).ToList();
 
-        if (unsupportedCommands.Length > 0)
+        if (unsupportedCommands.Count > 0)
         {
-            return new Command[0];
+            return new Command[0].ToList();
         }
 
         List<Command> commands = new List<Command>();
@@ -96,11 +92,11 @@ public class RoverAppService : IRoverAppService
             commands.Add(commandEnum);
         }
 
-        return commands.ToArray();
+        return commands.ToList();
     }
 
 
-    private void Execute(Rover rover, Command commandType)
+    private void Execute(Rover rover, Command command)
     {
         IHeadingAppService _headingService;
 
@@ -128,7 +124,7 @@ public class RoverAppService : IRoverAppService
 
         if (_headingService != null)
         {
-            switch (commandType)
+            switch (command)
             {
                 case Command.Forward:
                     {
@@ -173,34 +169,34 @@ public class RoverAppService : IRoverAppService
         return roverIsInPlatform;
     }
 
-    private LocationResult CreateRoverLocation(Platform platform, string coordinateString)
+    private LocationResult CreateRoverLocation(Platform platform, string coordinate)
     {
         LocationResult locationResult = new LocationResult();
 
-        if (string.IsNullOrEmpty(coordinateString) || string.IsNullOrWhiteSpace(coordinateString))
+        if (string.IsNullOrEmpty(coordinate) || string.IsNullOrWhiteSpace(coordinate))
         {
-            locationResult.AlertMessage = "Coordinate string must be this format: 1 2 N";
+            locationResult.AlertMessage = "The coordinate string should be in the format: 1 2 N";
 
             return locationResult;
         }
 
-        string[] separatedValues = coordinateString.Split(' ');
+        string[] separateds = coordinate.Split(' ');
 
-        if (separatedValues.Length != 3)
+        if (separateds.Length != 3)
         {
-            locationResult.AlertMessage = "Coordinate string must be includes x,y and heading value";
+            locationResult.AlertMessage = "Coordinate string must contain x, y and header value";
 
             return locationResult;
         }
 
-        if (!int.TryParse(separatedValues[0], out var xCoordinate))
+        if (!int.TryParse(separateds[0], out var xCoordinate))
         {
             locationResult.AlertMessage = "Coordinate x is not valid";
 
             return locationResult;
         }
 
-        if (!int.TryParse(separatedValues[1], out var yCoordinate))
+        if (!int.TryParse(separateds[1], out var yCoordinate))
         {
             locationResult.AlertMessage = "Coordinate y is not valid";
 
@@ -209,19 +205,19 @@ public class RoverAppService : IRoverAppService
 
         if (xCoordinate < 0 || xCoordinate > platform.X)
         {
-            locationResult.AlertMessage = "Coordinate x is out plateau";
+            locationResult.AlertMessage = "Coordinate x outside the platform";
 
             return locationResult;
         }
 
         if (yCoordinate < 0 || yCoordinate > platform.Y)
         {
-            locationResult.AlertMessage = "Coordinate y is out plateau";
+            locationResult.AlertMessage = "Coordinate y outside the platform";
 
             return locationResult;
         }
 
-        Heading? heading = CreateHeading(separatedValues[2]);
+        Heading? heading = CreateHeading(separateds[2]);
 
         if (heading == null)
         {

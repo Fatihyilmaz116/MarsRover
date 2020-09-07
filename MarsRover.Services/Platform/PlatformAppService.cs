@@ -7,8 +7,7 @@ namespace MarsRover.Services.Platform
     public class PlatformAppService : IPlatformAppService
     {
         public Core.Models.Platform Create(string coordinate)
-        {
-           
+        { 
             if (string.IsNullOrEmpty(coordinate) || string.IsNullOrWhiteSpace(coordinate))
             {
                 return null;
